@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UPCH - Elementos de Química | Clase 3</title>
+    <style>
+        /* ===== VARIABLES Y RESET ===== */
+        :root {
+            --upch-gold: #E8B800;
+            --upch-dark: #0B2A3A;
+            --upch-blue: #1A4A5A;
+            --upch-light: #2A6A7A;
+            --accent: #E94560;
+            --text: #1e3c4a;
+            --white: #ffffff;
+            --sand: #f4e9c1;
+            --shadow: rgba(0, 0, 0, 0.15);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f0f2 0%, #c8d8dc 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--upch-dark) 0%, var(--upch-light) 100%);
+            color: var(--white);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 6px 20px var(--shadow);
+            border-bottom: 5px solid var(--upch-gold);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        .logo-upch {
+            width: 120px;
+            height: auto;
+            background: var(--white);
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.2rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            color: var(--upch-gold);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* ===== NAV ===== */
+        .nav-container {
+            background: var(--upch-dark);
+            padding: 0.8rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .nav-btn {
+            background: var(--white);
+            color: var(--upch-dark);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+        }
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--upch-gold);
+            color: var(--upch-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ===== CONTENEDOR ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 24px var(--shadow);
+            border-left: 6px solid var(--upch-gold);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        h2 {
+            color: var(--upch-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--upch-gold);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--upch-light);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* ===== CAJAS DE INFORMACIÓN ===== */
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #2196f3;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .tip-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .bio-box {
+            background: linear-gradient(135deg, #d1ecf1 0%, #a8dadc 100%);
+            border-left: 5px solid #17a2b8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .pharma-box {
+            background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%);
+            border-left: 5px solid #dc3545;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .problem-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 5px solid #28a745;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* ===== TABLAS ===== */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            min-width: 500px;
+        }
+        th {
+            background: linear-gradient(135deg, var(--upch-blue), var(--upch-light));
+            color: var(--white);
+            padding: 1rem 1.2rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover td {
+            background: #f8fff0;
+        }
+
+        /* ===== PESTAÑAS INTERNAS ===== */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .tab {
+            background: var(--sand);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            background: var(--upch-gold);
+            color: var(--upch-dark);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* ===== CALCULADORAS ===== */
+        .calculator {
+            background: linear-gradient(135deg, #fff9f5 0%, #fff0e8 100%);
+            border: 3px solid var(--upch-gold);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .calc-title {
+            color: var(--upch-blue);
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .calc-input-group {
+            margin: 1rem 0;
+        }
+        .calc-input-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+        .calc-input-group input,
+        .calc-input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--sand);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .calc-input-group input:focus,
+        .calc-input-group select:focus {
+            outline: none;
+            border-color: var(--upch-gold);
+        }
+        .calc-button {
+            background: var(--upch-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .calc-button:hover {
+            background: var(--upch-gold);
+            color: var(--upch-dark);
+            transform: translateY(-2px);
+        }
+        .calc-result {
+            background: var(--white);
+            border-left: 5px solid var(--accent);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            display: none;
+        }
+        .calc-result.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ===== FLASHCARDS ===== */
+        .fc-stats {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .fc-stat {
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+        .fc-stat.good {
+            background: #28a745;
+        }
+        .fc-stat.bad {
+            background: #dc3545;
+        }
+        .fc-stat.pending {
+            background: #6c757d;
+        }
+        .fc-stat.total {
+            background: var(--upch-light);
+        }
+        .fc-progress {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            max-width: 720px;
+            margin: 0 auto 1.5rem;
+        }
+        .fc-progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--upch-gold), var(--accent));
+            transition: width 0.4s;
+        }
+        .flashcard-scene {
+            perspective: 1400px;
+            max-width: 720px;
+            height: 320px;
+            margin: 0 auto 1.5rem;
+        }
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        .fc-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: auto;
+            box-shadow: 0 8px 24px var(--shadow);
+            font-size: 1.15rem;
+        }
+        .fc-front {
+            background: linear-gradient(135deg, var(--upch-blue), var(--upch-light));
+            color: #fff;
+            border: 3px solid var(--upch-gold);
+        }
+        .fc-back {
+            background: linear-gradient(135deg, #fff9e6, var(--sand));
+            color: var(--text);
+            border: 3px solid var(--upch-gold);
+            transform: rotateY(180deg);
+        }
+        .fc-label {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-weight: 800;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        .fc-hint {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        .fc-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .fc-btn {
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #fff;
+        }
+        .fc-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .fc-btn.good {
+            background: #28a745;
+        }
+        .fc-btn.bad {
+            background: #dc3545;
+        }
+        .fc-btn:not(:disabled):hover {
+            transform: translateY(-3px);
+        }
+        .fc-link {
+            background: none;
+            border: none;
+            color: #6c757d;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* ===== MAPA CONCEPTUAL ===== */
+        .map-container {
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+        .map-tree,
+        .map-tree ul {
+            list-style: none;
+        }
+        .map-tree ul {
+            display: none;
+            padding-left: 1.6rem;
+            margin-top: 0.6rem;
+            border-left: 3px solid var(--upch-gold);
+        }
+        .map-tree li.open>ul {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        .map-tree li {
+            margin: 0.4rem 0;
+        }
+        .map-node {
+            display: inline-block;
+            background: var(--upch-blue);
+            color: #fff;
+            padding: 0.6rem 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .map-node:hover {
+            background: var(--upch-gold);
+            color: var(--upch-dark);
+            transform: translateX(4px);
+        }
+        .map-node.root {
+            background: var(--accent);
+            font-size: 1.15rem;
+        }
+        .map-node.branch {
+            background: var(--upch-light);
+        }
+        .map-leaf {
+            display: inline-block;
+            background: var(--sand);
+            color: var(--text);
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            border: 2px solid var(--upch-gold);
+        }
+        li.has-children>.map-node::before {
+            content: '▶ ';
+            font-size: 0.8em;
+        }
+        li.has-children.open>.map-node::before {
+            content: '▼ ';
+            font-size: 0.8em;
+        }
+
+        /* ===== GLOSARIO ===== */
+        .glossary-term {
+            background: var(--white);
+            border: 2px solid var(--upch-gold);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .glossary-term:hover {
+            background: #fff9e6;
+            transform: translateX(5px);
+        }
+        .glossary-definition {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--upch-gold);
+        }
+        .glossary-definition.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* ===== ERRORES ===== */
+        .error-card {
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffb3b3 100%);
+            border-left: 5px solid #dc3545;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .error-title {
+            color: #dc3545;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .correction {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* ===== QUIZ ===== */
+        .quiz-container {
+            background: linear-gradient(135deg, var(--upch-blue) 0%, var(--upch-light) 100%);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .quiz-question {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+        .quiz-option {
+            background: var(--white);
+            color: var(--text);
+            border: 3px solid transparent;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .quiz-option:hover {
+            border-color: var(--upch-gold);
+            transform: translateY(-3px);
+        }
+        .quiz-option.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #2e7d32;
+        }
+        .quiz-option.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #c62828;
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .quiz-feedback {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .quiz-progress span {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--upch-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 5px solid var(--upch-gold);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            .logo-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .logo-upch {
+                width: 80px;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .nav-buttons {
+                gap: 0.4rem;
+            }
+            .nav-btn {
+                padding: 0.5rem 0.9rem;
+                font-size: 0.8rem;
+            }
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.5rem;
+            }
+            .tab {
+                flex-shrink: 0;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            .flashcard-scene {
+                height: 360px;
+            }
+            .fc-face {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            .fc-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            .fc-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.4rem;
+            }
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            header {
+                padding: 1rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .nav-btn {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.75rem;
+            }
+        }
+        /* ===== IMÁGENES ===== */
+        .img-container {
+            text-align: center;
+            margin: 1.8rem 0;
+        }
+        .img-container img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .card ul,
+        .info-box ul,
+        .bio-box ul,
+        .pharma-box ul {
+            padding-left: 1.8rem;
+            margin: 0.6rem 0;
+        }
+        .card ul ul,
+        .info-box ul ul {
+            padding-left: 2.2rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0.4rem;
+            list-style-type: circle;
+        }
+        .card li,
+        .info-box li {
+            margin-bottom: 0.6rem;
+            line-height: 1.6;
+        }
+        .card li strong,
+        .info-box li strong {
+            display: inline-block;
+            margin-right: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo-upch.png" alt="Logo UPCH" class="logo-upch" />
+            <div>
+                <h1>Universidad Peruana Cayetano Heredia</h1>
+                <p class="subtitle">Unidad de Formación Básica Integral - UFBI</p>
+                <p class="subtitle">Elementos de Química · Clase 3: Compuestos Iónicos y Moleculares · Mol y Número de Avogadro</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-container">
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showSection('inicio',this)">🏠 Inicio</button>
+            <button class="nav-btn" onclick="showSection('conceptos',this)">📚 Conceptos</button>
+            <button class="nav-btn" onclick="showSection('mapa',this)">🗺️ Mapa</button>
+            <button class="nav-btn" onclick="showSection('flashcards',this)">🃏 Flashcards</button>
+            <button class="nav-btn" onclick="showSection('herramientas',this)">🧮 Herramientas</button>
+            <button class="nav-btn" onclick="showSection('aplicaciones',this)">🏥 Aplicaciones</button>
+            <button class="nav-btn" onclick="showSection('mnemotecnias',this)">🧠 Nemotecnias</button>
+            <button class="nav-btn" onclick="showSection('glosario',this)">📖 Glosario</button>
+            <button class="nav-btn" onclick="showSection('errores',this)">⚠️ Errores</button>
+            <button class="nav-btn" onclick="showSection('bibliografia',this)">📚 Bibliografía</button>
+            <button class="nav-btn" onclick="showSection('quiz',this)">🎯 Quiz</button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- ==================== INICIO ==================== -->
+        <section id="inicio" class="section active">
+            <div class="card">
+                <h2>🎯 Objetivos de la Clase 3</h2>
+                <div class="info-box">
+                    <ul style="font-size:1.1rem; line-height:2;">
+                        <li>✓ Identificar y clasificar compuestos iónicos y moleculares.</li>
+                        <li>✓ Diferenciar entre unidad fórmula (compuestos iónicos) y molécula (compuestos moleculares).</li>
+                        <li>✓ Distinguir masa atómica, masa fórmula y masa molecular.</li>
+                        <li>✓ Comprender el concepto de mol y aplicarlo para determinar cantidades de sustancias (masa, número de partículas).</li>
+                        <li>✓ Realizar conversiones entre moles, gramos y número de partículas usando el número de Avogadro.</li>
+                        <li>✓ Relacionar estos conceptos con aplicaciones en ciencias de la salud.</li>
+                    </ul>
+                </div>
+                <h3>🩺 Relevancia para las Ciencias de la Salud</h3>
+                <div class="bio-box">
+                    <strong>¿Por qué es fundamental este tema?</strong><br>
+                    Los compuestos iónicos y moleculares son la base de los medicamentos, los electrolitos corporales y los nutrientes. El mol permite dosificar fármacos, preparar soluciones intravenosas y entender las concentraciones biológicas.
+                    <ul style="margin-top:0.8rem;">
+                        <li>• <strong>Electrolitos:</strong> NaCl (cloruro de sodio), KCl, CaCO₃ – regulan el equilibrio hídrico y ácido-base.</li>
+                        <li>• <strong>Fármacos:</strong> aspirina (C₉H₈O₄), paracetamol (C₈H₉NO₂) – compuestos moleculares con acción terapéutica.</li>
+                        <li>• <strong>Nutrientes:</strong> glucosa (C₆H₁₂O₆), sales minerales como el fosfato de calcio.</li>
+                        <li>• <strong>Dosificación:</strong> el mol permite calcular la cantidad exacta de principio activo en una dosis.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CONCEPTOS ==================== -->
+        <section id="conceptos" class="section">
+            <div class="card">
+                <h2>📚 Conceptos Fundamentales</h2>
+                <div id="conceptos-tabs" class="tab-group">
+                    <div class="tabs">
+                        <button class="tab active" onclick="showTab('conceptos-tabs','sub-ionicos',this)">⚛️ Compuestos Iónicos</button>
+                        <button class="tab" onclick="showTab('conceptos-tabs','sub-moleculares',this)">🧪 Compuestos Moleculares</button>
+                        <button class="tab" onclick="showTab('conceptos-tabs','sub-mol',this)">⚖️ Mol y Avogadro</button>
+                    </div>
+
+                    <!-- Compuestos Iónicos -->
+                    <div id="sub-ionicos" class="tab-content active">
+                        <h3>Compuestos Iónicos</h3>
+                        <p>Se forman por la atracción electrostática entre iones de carga opuesta. Generalmente un <strong>metal</strong> (catión) y un <strong>no metal</strong> (anión).</p>
+                        <ul>
+                            <li><strong>Enlace iónico:</strong> transferencia de electrones del metal al no metal.</li>
+                            <li><strong>Unidad fórmula (u.f.):</strong> representa la relación más simple de iones en el compuesto (ej. NaCl, CaCl₂, KNO₃).</li>
+                            <li><strong>Red cristalina:</strong> estructura ordenada tridimensional de iones.</li>
+                            <li><strong>Propiedades:</strong> sólidos a temperatura ambiente, altos puntos de fusión, solubles en agua, conducen electricidad en disolución o fundidos.</li>
+                        </ul>
+                        <div class="img-container">
+                            <img src="red-ionica.png" alt="Red cristalina iónica" class="molecule-img">
+                        </div>
+                        <div class="info-box">
+                            <strong>Ejemplos de interés en salud:</strong>
+                            <ul>
+                                <li><strong>NaCl</strong> – cloruro de sodio (suero fisiológico).</li>
+                                <li><strong>KCl</strong> – cloruro de potasio (electrolito).</li>
+                                <li><strong>CaCO₃</strong> – carbonato de calcio (antiácido, suplemento).</li>
+                                <li><strong>MgSO₄</strong> – sulfato de magnesio (relajante muscular).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Compuestos Moleculares -->
+                    <div id="sub-moleculares" class="tab-content">
+                        <h3>Compuestos Moleculares</h3>
+                        <p>Se forman por la unión de <strong>no metales</strong> mediante <strong>enlaces covalentes</strong> (compartición de electrones).</p>
+                        <ul>
+                            <li><strong>Molécula:</strong> la partícula más pequeña que conserva las propiedades del compuesto.</li>
+                            <li>Pueden estar formados por átomos iguales (O₂, N₂) o diferentes (H₂O, CO₂, C₆H₁₂O₆).</li>
+                            <li><strong>Propiedades:</strong> pueden ser gases, líquidos o sólidos; puntos de fusión y ebullición bajos; no conducen electricidad.</li>
+                        </ul>
+                        <div class="img-container">
+                            <img src="moleculas.png" alt="Moléculas comunes" class="molecule-img">
+                        </div>
+                        <div class="tip-box">
+                            <strong>Ejemplos en el cuerpo humano:</strong>
+                            <ul>
+                                <li><strong>H₂O</strong> – agua (el solvente universal).</li>
+                                <li><strong>CO₂</strong> – dióxido de carbono (producto del metabolismo).</li>
+                                <li><strong>Glucosa (C₆H₁₂O₆)</strong> – fuente de energía.</li>
+                                <li><strong>O₂</strong> – oxígeno (respiración celular).</li>
+                                <li><strong>Fármacos:</strong> aspirina (C₉H₈O₄), paracetamol (C₈H₉NO₂).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mol y Avogadro -->
+                    <div id="sub-mol" class="tab-content">
+                        <h3>Mol y Número de Avogadro</h3>
+                        <p>El <strong>mol</strong> es la cantidad de sustancia que contiene tantas entidades elementales (átomos, moléculas, iones, unidades fórmula) como átomos hay en exactamente 12 g de carbono-12.</p>
+                        <ul>
+                            <li><strong>Número de Avogadro (Nₐ):</strong> 6,022 × 10²³ partículas por mol.</li>
+                            <li><strong>Masa molar:</strong> masa de un mol de partículas (g/mol). Numéricamente igual a la masa atómica, molecular o fórmula en u.m.a., pero en gramos.</li>
+                            <li><strong>Conversiones:</strong>
+                                <ul>
+                                    <li>moles ↔ gramos (usando masa molar).</li>
+                                    <li>moles ↔ número de partículas (usando Nₐ).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="bio-box">
+                            <strong>Relaciones importantes:</strong><br>
+                            1 mol de NaCl = 6,022×10²³ u.f. de NaCl = 58,44 g de NaCl.<br>
+                            1 mol de H₂O = 6,022×10²³ moléculas de H₂O = 18 g de H₂O.<br>
+                            1 mol de iones Na⁺ = 6,022×10²³ iones Na⁺.
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr><th>Sustancia</th><th>Masa molar (g/mol)</th><th>Partículas por mol</th></tr>
+                                <tr><td>NaCl (sal)</td><td>58,44</td><td>6,022×10²³ u.f.</td></tr>
+                                <tr><td>H₂O (agua)</td><td>18,02</td><td>6,022×10²³ moléculas</td></tr>
+                                <tr><td>Glucosa (C₆H₁₂O₆)</td><td>180,16</td><td>6,022×10²³ moléculas</td></tr>
+                                <tr><td>CaCO₃ (carbonato de calcio)</td><td>100,09</td><td>6,022×10²³ u.f.</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MAPA CONCEPTUAL ==================== -->
+        <section id="mapa" class="section">
+            <div class="card">
+                <h2>🗺️ Mapa Conceptual Interactivo</h2>
+                <p style="margin-bottom:1rem;">Haz <strong>clic</strong> en cada nodo para desplegar u ocultar sus ramas.</p>
+                <div class="map-container">
+                    <ul class="map-tree">
+                        <li class="has-children">
+                            <div class="map-node root" onclick="toggleMap(this)">🧪 Compuestos Químicos y Mol</div>
+                            <ul>
+                                <li class="has-children">
+                                    <div class="map-node branch" onclick="toggleMap(this)">⚛️ Compuestos Iónicos</div>
+                                    <ul>
+                                        <li><span class="map-leaf">Metal + No metal → Enlace iónico</span></li>
+                                        <li><span class="map-leaf">Unidad fórmula (u.f.)</span></li>
+                                        <li><span class="map-leaf">Red cristalina</span></li>
+                                        <li><span class="map-leaf">Ejemplos: NaCl, KCl, CaCO₃</span></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <div class="map-node branch" onclick="toggleMap(this)">🧬 Compuestos Moleculares</div>
+                                    <ul>
+                                        <li><span class="map-leaf">No metales → Enlace covalente</span></li>
+                                        <li><span class="map-leaf">Molécula (partícula más pequeña)</span></li>
+                                        <li><span class="map-leaf">Ejemplos: H₂O, CO₂, glucosa, aspirina</span></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <div class="map-node branch" onclick="toggleMap(this)">⚖️ Mol y Número de Avogadro</div>
+                                    <ul>
+                                        <li><span class="map-leaf">1 mol = 6,022×10²³ partículas</span></li>
+                                        <li><span class="map-leaf">Masa molar (g/mol)</span></li>
+                                        <li><span class="map-leaf">Conversiones: moles ↔ gramos ↔ partículas</span></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <div class="map-node branch" onclick="toggleMap(this)">🏥 Aplicaciones en Salud</div>
+                                    <ul>
+                                        <li><span class="map-leaf">Electrolitos (NaCl, KCl)</span></li>
+                                        <li><span class="map-leaf">Fármacos (aspirina, paracetamol)</span></li>
+                                        <li><span class="map-leaf">Nutrientes (glucosa, CaCO₃)</span></li>
+                                        <li><span class="map-leaf">Dosificación y soluciones</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FLASHCARDS ==================== -->
+        <section id="flashcards" class="section">
+            <div class="card">
+                <h2>🃏 Flashcards de Estudio</h2>
+                <p>Haz <strong>clic</strong> en la tarjeta para voltearla y ver la respuesta. Luego califícate con honestidad.</p>
+
+                <div class="fc-stats">
+                    <span class="fc-stat good">✅ Buenas: <span id="fc-good">0</span></span>
+                    <span class="fc-stat bad">❌ Malas: <span id="fc-bad">0</span></span>
+                    <span class="fc-stat pending">⏳ Pendientes: <span id="fc-left">0</span></span>
+                    <span class="fc-stat total">📈 Historial: <span id="fc-hist">0 ✓ / 0 ✗</span></span>
+                </div>
+                <div class="fc-progress"><div class="fc-progress-bar" id="fc-bar"></div></div>
+
+                <div class="flashcard-scene" id="fc-scene">
+                    <div class="flashcard" id="fc-card" onclick="flipCard()">
+                        <div class="fc-face fc-front">
+                            <div class="fc-label">PREGUNTA</div>
+                            <div id="fc-question"></div>
+                            <span class="fc-hint">Clic para voltear ✨</span>
+                        </div>
+                        <div class="fc-face fc-back">
+                            <div class="fc-label">RESPUESTA</div>
+                            <div id="fc-answer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fc-controls" id="fc-controls">
+                    <button class="fc-btn good" id="btn-fc-good" onclick="gradeCard(true)" disabled>✅ La sabía</button>
+                    <button class="fc-btn bad" id="btn-fc-bad" onclick="gradeCard(false)" disabled>❌ No la sabía</button>
+                </div>
+
+                <div id="fc-summary" class="calc-result" style="max-width:720px;margin:1rem auto;"></div>
+                <div style="text-align:center;">
+                    <button class="calc-button" onclick="resetFlashcards()">🔄 Reiniciar Flashcards</button><br>
+                    <button class="fc-link" onclick="borrarHistorial()">Borrar historial acumulado</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== HERRAMIENTAS ==================== -->
+        <section id="herramientas" class="section">
+            <div class="card">
+                <h2>🧮 Herramientas Interactivas</h2>
+                <div id="herramientas-tabs" class="tab-group">
+                    <div class="tabs">
+                        <button class="tab active" onclick="showTab('herramientas-tabs','calc-masa-molar',this)">⚖️ Masa Molar</button>
+                        <button class="tab" onclick="showTab('herramientas-tabs','calc-mol-gramos',this)">🔄 Moles ↔ Gramos</button>
+                        <button class="tab" onclick="showTab('herramientas-tabs','calc-partículas',this)">🔢 Partículas ↔ Moles</button>
+                    </div>
+
+                    <!-- Masa molar -->
+                    <div id="calc-masa-molar" class="tab-content active">
+                        <div class="calculator">
+                            <div class="calc-title">⚖️ Calculadora de Masa Molar</div>
+                            <p>Ingresa la fórmula de un compuesto (ej. NaCl, H₂O, C₆H₁₂O₆). Usa números enteros y no espacios.</p>
+                            <div class="calc-input-group">
+                                <label>Fórmula química:</label>
+                                <input type="text" id="formula-masa" placeholder="ej. NaCl" />
+                            </div>
+                            <button class="calc-button" onclick="calcularMasaMolar()">Calcular masa molar</button>
+                            <div id="resultado-masa-molar" class="calc-result"></div>
+                            <div class="tip-box" style="margin-top:1.5rem;">
+                                <strong>Ejemplo:</strong> NaCl → Na (22,99) + Cl (35,45) = 58,44 g/mol.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Moles ↔ Gramos -->
+                    <div id="calc-mol-gramos" class="tab-content">
+                        <div class="calculator">
+                            <div class="calc-title">🔄 Conversión Moles ↔ Gramos</div>
+                            <div class="calc-input-group">
+                                <label>Masa molar (g/mol):</label>
+                                <input type="number" id="mm-conv" placeholder="ej. 58,44" step="any" />
+                            </div>
+                            <div class="calc-input-group">
+                                <label>Cantidad:</label>
+                                <input type="number" id="cantidad-conv" placeholder="ej. 2 (moles o gramos)" step="any" />
+                            </div>
+                            <div class="calc-input-group">
+                                <label>Convertir de:</label>
+                                <select id="tipo-conv">
+                                    <option value="mol-a-g">Moles a gramos</option>
+                                    <option value="g-a-mol">Gramos a moles</option>
+                                </select>
+                            </div>
+                            <button class="calc-button" onclick="convertirMolGramo()">Convertir</button>
+                            <div id="resultado-conv" class="calc-result"></div>
+                        </div>
+                    </div>
+
+                    <!-- Partículas ↔ Moles -->
+                    <div id="calc-partículas" class="tab-content">
+                        <div class="calculator">
+                            <div class="calc-title">🔢 Conversión Partículas ↔ Moles</div>
+                            <p>Usa el número de Avogadro (6,022×10²³ partículas/mol).</p>
+                            <div class="calc-input-group">
+                                <label>Cantidad de moles:</label>
+                                <input type="number" id="mol-para-part" placeholder="ej. 0,5" step="any" />
+                            </div>
+                            <button class="calc-button" onclick="calcularParticulas()">Calcular partículas</button>
+                            <div id="resultado-particulas" class="calc-result"></div>
+                            <div style="margin-top:1.5rem;">
+                                <label style="font-weight:600;">O ingresa partículas para obtener moles:</label>
+                                <div class="calc-input-group">
+                                    <input type="number" id="part-para-mol" placeholder="ej. 3,01×10²³" step="any" />
+                                </div>
+                                <button class="calc-button" onclick="calcularMolesDesdeParticulas()">Calcular moles</button>
+                                <div id="resultado-moles-desde-part" class="calc-result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== APLICACIONES ==================== -->
+        <section id="aplicaciones" class="section">
+            <div class="card">
+                <h2>🏥 Aplicaciones en Ciencias de la Salud</h2>
+                <p>Los compuestos iónicos y moleculares, así como el concepto de mol, tienen aplicaciones cotidianas en el ámbito sanitario.</p>
+                <div class="img-container">
+                    <img src="aplicaciones-salud-clase3.png" alt="Aplicaciones en salud - compuestos y mol" class="molecule-img">
+                </div>
+
+                <h3>💧 Electrolitos y equilibrio corporal</h3>
+                <div class="bio-box">
+                    <ul>
+                        <li><strong>NaCl (cloruro de sodio):</strong> solución salina al 0,9% (suero fisiológico) para rehidratación.</li>
+                        <li><strong>KCl (cloruro de potasio):</strong> utilizado en soluciones intravenosas para corregir hipocalemia.</li>
+                        <li><strong>CaCO₃ (carbonato de calcio):</strong> antiácido y suplemento de calcio.</li>
+                        <li><strong>MgSO₄ (sulfato de magnesio):</strong> para tratar eclampsia y arritmias.</li>
+                    </ul>
+                </div>
+
+                <h3>💊 Fármacos comunes (compuestos moleculares)</h3>
+                <div class="table-responsive">
+                    <table>
+                        <tr><th>Fármaco</th><th>Fórmula</th><th>Masa molar (g/mol)</th><th>Uso terapéutico</th></tr>
+                        <tr><td>Aspirina</td><td>C₉H₈O₄</td><td>180,16</td><td>Analgésico, antiinflamatorio, antiagregante</td></tr>
+                        <tr><td>Paracetamol</td><td>C₈H₉NO₂</td><td>151,16</td><td>Analgésico, antipirético</td></tr>
+                        <tr><td>Glucosa</td><td>C₆H₁₂O₆</td><td>180,16</td><td>Nutrición parenteral</td></tr>
+                        <tr><td>Ibuprofeno</td><td>C₁₃H₁₈O₂</td><td>206,28</td><td>Antiinflamatorio no esteroideo</td></tr>
+                    </table>
+                </div>
+
+                <h3>🧪 Dosificación y cálculos clínicos</h3>
+                <div class="pharma-box">
+                    <ul>
+                        <li>El <strong>mol</strong> permite calcular la cantidad exacta de principio activo en una dosis (ej. 500 mg de paracetamol = 0,0033 mol).</li>
+                        <li>Preparación de soluciones: concentraciones en molaridad (mol/L) para sueros y medicamentos intravenosos.</li>
+                        <li>Interpretación de análisis clínicos: niveles de electrolitos (Na⁺, K⁺) en mmol/L.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MNEMOTECNIAS ==================== -->
+        <section id="mnemotecnias" class="section">
+            <div class="card">
+                <h2>🧠 Nemotecnias y Reglas Mnemotécnicas</h2>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#f0f8ff 0%,#d4edda 100%);border:3px solid var(--upch-gold);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--upch-blue);font-weight:700;font-size:1.2rem;">🧂 "El metal se enamora del no metal"</div>
+                    <p style="font-style:italic;line-height:2;">
+                        <strong>"Metal + No metal = Iónico"</strong> — los compuestos iónicos se forman entre un metal y un no metal.
+                    </p>
+                </div>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);border:3px solid var(--accent);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--accent);font-weight:700;font-size:1.2rem;">🔗 "No metales se comparten"</div>
+                    <div class="tip-box">
+                        <strong>Compuestos moleculares:</strong> "No metal + No metal → comparten electrones (enlace covalente)."
+                    </div>
+                </div>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);border:3px solid var(--accent);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--accent);font-weight:700;font-size:1.2rem;">📦 "El mol es como una docena de química"</div>
+                    <div class="info-box">
+                        "1 mol = 6,022×10²³ partículas" (como 1 docena = 12 unidades).
+                        <br>Recuerda: <strong>Nₐ = 6,022 × 10²³</strong>.
+                    </div>
+                </div>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);border:3px solid var(--accent);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--accent);font-weight:700;font-size:1.2rem;">⚖️ "Masa molar = masa atómica en gramos"</div>
+                    <p>La masa molar de un elemento (g/mol) es numéricamente igual a su masa atómica (u.m.a.).</p>
+                </div>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);border:3px solid var(--accent);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--accent);font-weight:700;font-size:1.2rem;">🧪 "Fórmula molecular vs. unidad fórmula"</div>
+                    <div class="tip-box">
+                        <strong>Unidad fórmula:</strong> para compuestos iónicos (ej. NaCl).<br>
+                        <strong>Molécula:</strong> para compuestos moleculares (ej. H₂O).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== GLOSARIO ==================== -->
+        <section id="glosario" class="section">
+            <div class="card">
+                <h2>📖 Glosario Interactivo</h2>
+                <p style="margin-bottom:1.5rem;">Haz clic en cada término para ver su definición:</p>
+
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Compuesto iónico</strong><div class="glossary-definition">Sustancia formada por iones unidos por enlaces iónicos. Generalmente metal + no metal. Se representa por una unidad fórmula.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Compuesto molecular</strong><div class="glossary-definition">Sustancia formada por moléculas con enlaces covalentes entre no metales. La molécula es su partícula más pequeña.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Unidad fórmula (u.f.)</strong><div class="glossary-definition">Relación mínima de iones en un compuesto iónico. Ej. NaCl, CaCl₂.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Molécula</strong><div class="glossary-definition">Partícula más pequeña de un compuesto molecular que conserva sus propiedades. Formada por dos o más átomos no metálicos.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Masa atómica</strong><div class="glossary-definition">Masa de un átomo en unidades de masa atómica (u.m.a.). Se obtiene de la tabla periódica.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Masa fórmula</strong><div class="glossary-definition">Masa de una unidad fórmula de un compuesto iónico en u.m.a. Se suma la masa atómica de cada ion.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Masa molecular</strong><div class="glossary-definition">Masa de una molécula en u.m.a. Se suma la masa atómica de todos los átomos.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Mol</strong><div class="glossary-definition">Cantidad de sustancia que contiene 6,022×10²³ entidades (átomos, moléculas, iones, etc.).</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Número de Avogadro (Nₐ)</strong><div class="glossary-definition">6,022×10²³ partículas por mol. Permite convertir entre moles y número de partículas.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Masa molar</strong><div class="glossary-definition">Masa de un mol de sustancia en gramos. Numéricamente igual a la masa atómica, fórmula o molecular, pero en g/mol.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Enlace iónico</strong><div class="glossary-definition">Atracción electrostática entre iones de carga opuesta. Se da entre metales y no metales.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Enlace covalente</strong><div class="glossary-definition">Compartición de pares de electrones entre átomos no metálicos. Forma moléculas.</div></div>
+            </div>
+        </section>
+
+        <!-- ==================== ERRORES COMUNES ==================== -->
+        <section id="errores" class="section">
+            <div class="card">
+                <h2>⚠️ Errores Comunes de Estudiantes</h2>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 1: Confundir compuesto iónico con molecular</div>
+                    <p><strong>Error:</strong> "El CO₂ es un compuesto iónico."</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> CO₂ está formado por no metales (C y O) con enlaces covalentes, es un compuesto molecular. Los compuestos iónicos son metal + no metal.</div>
+                </div>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 2: Usar "molécula" para compuestos iónicos</div>
+                    <p><strong>Error:</strong> "Una molécula de NaCl."</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> NaCl es iónico, la partícula más pequeña es la unidad fórmula, no molécula. Las moléculas son para compuestos covalentes.</div>
+                </div>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 3: No distinguir masa atómica de masa molar</div>
+                    <p><strong>Error:</strong> "La masa atómica del Na es 23 g."</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> La masa atómica es 23 u.m.a.; la masa molar es 23 g/mol (numéricamente igual pero en gramos por mol).</div>
+                </div>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 4: Olvidar el número de Avogadro en conversiones</div>
+                    <p><strong>Error:</strong> Calcular moléculas sin usar 6,022×10²³.</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> Siempre multiplica los moles por Nₐ para obtener el número de partículas. Ej: 2 mol H₂O = 2 × 6,022×10²³ = 1,2044×10²⁴ moléculas.</div>
+                </div>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 5: No sumar correctamente las masas atómicas</div>
+                    <p><strong>Error:</strong> Calcular masa molar de CaCO₃ como 40+12+16 = 68 en lugar de 40+12+3(16)=100.</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> Multiplica cada átomo por su subíndice: Ca(40) + C(12) + O(16×3) = 100 g/mol.</div>
+                </div>
+
+                <div class="tip-box" style="margin-top:2rem;">
+                    <strong>💡 Consejo:</strong> Practica con las herramientas interactivas y flashcards para afianzar estos conceptos.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BIBLIOGRAFÍA ==================== -->
+        <section id="bibliografia" class="section">
+            <div class="card">
+                <h2>📚 Bibliografía Universitaria</h2>
+
+                <h3>Libros de Química General</h3>
+                <div class="info-box">
+                    <strong>1. Chang, R., & Goldsby, K. A. (2017).</strong> <em>Química</em> (12ª ed.). McGraw-Hill.<br>
+                    • <strong>Capítulo 2:</strong> Átomos, moléculas y iones (páginas 40-75).<br>
+                    • <strong>Capítulo 3:</strong> Relaciones de masa en las reacciones químicas (páginas 76-115).<br>
+                    • <strong>Capítulo 4:</strong> Reacciones en disolución acuosa (compuestos iónicos).
+                </div>
+                <div class="info-box">
+                    <strong>2. Brown, T. L., LeMay, H. E., Bursten, B. E., & Murphy, C. J. (2018).</strong> <em>Química: La Ciencia Central</em> (13ª ed.). Pearson.<br>
+                    • <strong>Capítulo 2:</strong> Átomos, moléculas e iones.<br>
+                    • <strong>Capítulo 3:</strong> Estequiometría: cálculos con fórmulas y ecuaciones químicas.
+                </div>
+                <div class="info-box">
+                    <strong>3. Petrucci, R. H., Herring, F. G., Madura, J. D., & Bissonnette, C. (2017).</strong> <em>Química General: Principios y Aplicaciones Modernas</em> (11ª ed.). Pearson.<br>
+                    • <strong>Capítulo 2:</strong> Átomos y la teoría atómica.<br>
+                    • <strong>Capítulo 3:</strong> Compuestos químicos.<br>
+                    • <strong>Capítulo 4:</strong> Estequiometría.
+                </div>
+
+                <h3>Recursos en Línea</h3>
+                <div class="bio-box">
+                    <strong>Tabla Periódica Interactiva:</strong> <a href="https://ptable.com" target="_blank" style="color:var(--upch-blue);">https://ptable.com</a><br>
+                    <strong>PubChem (compuestos y fármacos):</strong> <a href="https://pubchem.ncbi.nlm.nih.gov" target="_blank" style="color:var(--upch-blue);">https://pubchem.ncbi.nlm.nih.gov</a><br>
+                    <strong>Khan Academy - Estequiometría:</strong> <a href="https://es.khanacademy.org/science/chemistry" target="_blank" style="color:var(--upch-blue);">https://es.khanacademy.org</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== QUIZ ==================== -->
+        <section id="quiz" class="section">
+            <div class="card">
+                <h2>🎯 Quiz de Autoevaluación</h2>
+                <p>Se mostrarán <strong>5 preguntas al azar</strong> de un total de 15. Al finalizar, podrás cargar una nueva ronda.</p>
+                <div id="quiz-container"></div>
+                <div style="text-align:center;margin-top:2rem;">
+                    <button class="calc-button" onclick="cargarQuiz()">🔄 Nueva ronda</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p style="font-size:1.2rem;margin-bottom:0.5rem;">🎓 Universidad Peruana Cayetano Heredia</p>
+        <p>Unidad de Formación Básica Integral · Curso: Elementos de Química</p>
+        <p style="margin-top:0.5rem;font-style:italic;">"La química es el puente entre la materia y la vida"</p>
+        <p style="margin-top:2rem;font-size:0.9rem;">© 2026 · Material educativo para estudiantes de ciencias de la salud</p>
+    </footer>
+
+    <script>
+        // ============================================================
+        //  NAVEGACIÓN
+        // ============================================================
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showTab(groupId, tabId, btn) {
+            const group = document.getElementById(groupId);
+            group.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            group.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (btn) btn.classList.add('active');
+        }
+
+        // ============================================================
+        //  MAPA CONCEPTUAL
+        // ============================================================
+        function toggleMap(node) {
+            node.parentElement.classList.toggle('open');
+        }
+
+        // ============================================================
+        //  GLOSARIO
+        // ============================================================
+        function toggleDefinition(el) {
+            const def = el.querySelector('.glossary-definition');
+            def.classList.toggle('show');
+            el.style.background = def.classList.contains('show') ? '#fff9e6' : 'var(--white)';
+        }
+
+        // ============================================================
+        //  FLASHCARDS (20 tarjetas sobre clase 3)
+        // ============================================================
+        const flashcards = [
+            { q: '¿Qué es un compuesto iónico?', a: 'Sustancia formada por iones (metal + no metal) con enlace iónico.' },
+            { q: '¿Qué es un compuesto molecular?', a: 'Sustancia formada por no metales con enlaces covalentes (moléculas).' },
+            { q: '¿Qué es una unidad fórmula?', a: 'La relación mínima de iones en un compuesto iónico (ej. NaCl).' },
+            { q: '¿Qué es una molécula?', a: 'La partícula más pequeña de un compuesto molecular que conserva sus propiedades.' },
+            { q: '¿Cómo se representa un compuesto iónico?', a: 'Mediante una unidad fórmula (ej. CaCl₂, KNO₃).' },
+            { q: '¿Cómo se representa un compuesto molecular?', a: 'Mediante una fórmula molecular (ej. H₂O, C₆H₁₂O₆).' },
+            { q: '¿Qué es la masa atómica?', a: 'Masa de un átomo en unidades de masa atómica (u.m.a.).' },
+            { q: '¿Qué es la masa fórmula?', a: 'Masa de una unidad fórmula en u.m.a. (para compuestos iónicos).' },
+            { q: '¿Qué es la masa molecular?', a: 'Masa de una molécula en u.m.a. (para compuestos moleculares).' },
+            { q: '¿Qué es el mol?', a: 'Cantidad de sustancia que contiene 6,022×10²³ entidades.' },
+            { q: '¿Cuál es el número de Avogadro?', a: '6,022×10²³ partículas por mol.' },
+            { q: '¿Cómo se calcula la masa molar de un compuesto?', a: 'Sumando las masas atómicas de todos los átomos en la fórmula (en g/mol).' },
+            { q: '¿Cuántos gramos tiene 1 mol de NaCl?', a: '58,44 g (masa molar del NaCl).' },
+            { q: '¿Cuántas moléculas hay en 1 mol de H₂O?', a: '6,022×10²³ moléculas.' },
+            { q: '¿Cuántos iones Na⁺ hay en 1 mol de NaCl?', a: '6,022×10²³ iones Na⁺.' },
+            { q: '¿Qué tipo de compuesto es el CO₂?', a: 'Compuesto molecular (no metales: C y O).' },
+            { q: '¿Qué tipo de compuesto es el KCl?', a: 'Compuesto iónico (metal K + no metal Cl).' },
+            { q: '¿Qué es un catión?', a: 'Ión con carga positiva (pierde electrones).' },
+            { q: '¿Qué es un anión?', a: 'Ión con carga negativa (gana electrones).' },
+            { q: '¿Cuál es la masa molar del agua (H₂O)?', a: '18,02 g/mol (H:1×2 + O:16 = 18).' }
+        ];
+
+        let fcIndex = 0,
+            fcFlipped = false,
+            fcGood = 0,
+            fcBad = 0,
+            fcDone = false;
+
+        function fcUpdateStats() {
+            document.getElementById('fc-good').textContent = fcGood;
+            document.getElementById('fc-bad').textContent = fcBad;
+            document.getElementById('fc-left').textContent = Math.max(0, flashcards.length - fcIndex);
+            const tg = parseInt(localStorage.getItem('fcTotalGood') || '0', 10);
+            const tb = parseInt(localStorage.getItem('fcTotalBad') || '0', 10);
+            document.getElementById('fc-hist').textContent = tg + ' ✓ / ' + tb + ' ✗';
+            document.getElementById('fc-bar').style.width = (fcIndex / flashcards.length * 100) + '%';
+        }
+
+        function fcRenderCard() {
+            const card = document.getElementById('fc-card');
+            card.classList.remove('flipped');
+            fcFlipped = false;
+            document.getElementById('fc-question').textContent = flashcards[fcIndex].q;
+            document.getElementById('fc-answer').textContent = flashcards[fcIndex].a;
+            document.getElementById('btn-fc-good').disabled = true;
+            document.getElementById('btn-fc-bad').disabled = true;
+            fcUpdateStats();
+        }
+
+        function flipCard() {
+            if (fcDone) return;
+            const card = document.getElementById('fc-card');
+            card.classList.toggle('flipped');
+            fcFlipped = card.classList.contains('flipped');
+            document.getElementById('btn-fc-good').disabled = !fcFlipped;
+            document.getElementById('btn-fc-bad').disabled = !fcFlipped;
+        }
+
+        function gradeCard(wasGood) {
+            if (!fcFlipped || fcDone) return;
+            if (wasGood) {
+                fcGood++;
+                localStorage.setItem('fcTotalGood', String(parseInt(localStorage.getItem('fcTotalGood') || '0', 10) + 1));
+            } else {
+                fcBad++;
+                localStorage.setItem('fcTotalBad', String(parseInt(localStorage.getItem('fcTotalBad') || '0', 10) + 1));
+            }
+            fcIndex++;
+            if (fcIndex < flashcards.length) {
+                fcRenderCard();
+            } else {
+                fcFinish();
+            }
+        }
+
+        function fcFinish() {
+            fcDone = true;
+            document.getElementById('fc-scene').style.display = 'none';
+            document.getElementById('fc-controls').style.display = 'none';
+            const total = fcGood + fcBad;
+            const pct = Math.round(fcGood / total * 100);
+            let msg = pct >= 80 ? ' ¡Excelente! Dominas el tema.' : (pct >= 60 ? '💪 ¡Bien! Repasa las que fallaste.' :
+                '📚 Necesitas repasar: vuelve a la pestaña Conceptos.');
+            const sum = document.getElementById('fc-summary');
+            sum.innerHTML = '<strong>📊 Resumen de la sesión:</strong><br>✅ Buenas: ' + fcGood + ' &nbsp; ❌ Malas: ' + fcBad +
+                '<br>Precisión: <strong>' + pct + '%</strong><br>' + msg;
+            sum.classList.add('show');
+            fcUpdateStats();
+        }
+
+        function resetFlashcards() {
+            fcIndex = 0;
+            fcGood = 0;
+            fcBad = 0;
+            fcDone = false;
+            document.getElementById('fc-scene').style.display = 'block';
+            document.getElementById('fc-controls').style.display = 'flex';
+            document.getElementById('fc-summary').classList.remove('show');
+            fcRenderCard();
+        }
+
+        function borrarHistorial() {
+            localStorage.removeItem('fcTotalGood');
+            localStorage.removeItem('fcTotalBad');
+            fcUpdateStats();
+        }
+
+        // ============================================================
+        //  HERRAMIENTAS: Masa molar (sencilla)
+        // ============================================================
+        const masasAtomicas = {
+            H: 1.008,
+            He: 4.003,
+            Li: 6.941,
+            Be: 9.012,
+            B: 10.81,
+            C: 12.011,
+            N: 14.007,
+            O: 15.999,
+            F: 18.998,
+            Ne: 20.180,
+            Na: 22.990,
+            Mg: 24.305,
+            Al: 26.982,
+            Si: 28.086,
+            P: 30.974,
+            S: 32.065,
+            Cl: 35.453,
+            Ar: 39.948,
+            K: 39.098,
+            Ca: 40.078,
+            Sc: 44.956,
+            Ti: 47.867,
+            V: 50.942,
+            Cr: 51.996,
+            Mn: 54.938,
+            Fe: 55.845,
+            Co: 58.933,
+            Ni: 58.693,
+            Cu: 63.546,
+            Zn: 65.380,
+            Br: 79.904,
+            I: 126.904,
+            Ag: 107.868,
+            Au: 196.967,
+            Pt: 195.084
+        };
+
+        function calcularMasaMolar() {
+            const formula = document.getElementById('formula-masa').value.trim();
+            const res = document.getElementById('resultado-masa-molar');
+            if (!formula) {
+                res.innerHTML = '<span style="color:#f44336;">⚠️ Ingresa una fórmula válida (ej. NaCl, H2O).</span>';
+                res.classList.add('show');
+                return;
+            }
+            // Parseo muy simple: busca elementos con posible subíndice (números)
+            const regex = /([A-Z][a-z]?)(\d*)/g;
+            let match;
+            let totalMasa = 0;
+            let elements = [];
+            while ((match = regex.exec(formula)) !== null) {
+                const simbolo = match[1];
+                const subindice = parseInt(match[2] || '1', 10);
+                if (masasAtomicas[simbolo]) {
+                    elements.push(simbolo + subindice);
+                    totalMasa += masasAtomicas[simbolo] * subindice;
+                } else {
+                    res.innerHTML = '<span style="color:#f44336;">⚠️ Elemento no reconocido: ' + simbolo +
+                        '. Solo se admiten elementos comunes (H, C, N, O, Na, Cl, etc.).</span>';
+                    res.classList.add('show');
+                    return;
+                }
+            }
+            if (elements.length === 0) {
+                res.innerHTML = '<span style="color:#f44336;">⚠️ No se pudo interpretar la fórmula. Usa notación como NaCl, H2O, C6H12O6.</span>';
+                res.classList.add('show');
+                return;
+            }
+            res.innerHTML = '<strong>Masa molar de ' + formula + ':</strong> ' + totalMasa.toFixed(2) + ' g/mol<br>' +
+                'Componentes: ' + elements.join(' + ') + ' = ' + totalMasa.toFixed(2) + ' g/mol.';
+            res.classList.add('show');
+        }
+
+        // ============================================================
+        //  HERRAMIENTAS: Conversión moles ↔ gramos
+        // ============================================================
+        function convertirMolGramo() {
+            const mm = parseFloat(document.getElementById('mm-conv').value);
+            const cantidad = parseFloat(document.getElementById('cantidad-conv').value);
+            const tipo = document.getElementById('tipo-conv').value;
+            const res = document.getElementById('resultado-conv');
+            if (isNaN(mm) || mm <= 0 || isNaN(cantidad) || cantidad <= 0) {
+                res.innerHTML = '<span style="color:#f44336;">⚠️ Ingresa valores positivos.</span>';
+                res.classList.add('show');
+                return;
+            }
+            let resultado, unidad;
+            if (tipo === 'mol-a-g') {
+                resultado = cantidad * mm;
+                unidad = 'gramos';
+                res.innerHTML = cantidad + ' mol × ' + mm + ' g/mol = <strong>' + resultado.toFixed(2) + ' g</strong>';
+            } else {
+                resultado = cantidad / mm;
+                unidad = 'moles';
+                res.innerHTML = cantidad + ' g ÷ ' + mm + ' g/mol = <strong>' + resultado.toFixed(4) + ' mol</strong>';
+            }
+            res.classList.add('show');
+        }
+
+        // ============================================================
+        //  HERRAMIENTAS: Partículas ↔ Moles
+        // ============================================================
+        const N_A = 6.022e23;
+
+        function calcularParticulas() {
+            const mol = parseFloat(document.getElementById('mol-para-part').value);
+            const res = document.getElementById('resultado-particulas');
+            if (isNaN(mol) || mol <= 0) {
+                res.innerHTML = '<span style="color:#f44336;">⚠️ Ingresa una cantidad de moles positiva.</span>';
+                res.classList.add('show');
+                return;
+            }
+            const particulas = mol * N_A;
+            res.innerHTML = mol + ' mol × 6,022×10²³ = <strong>' + particulas.toExponential(4) + '</strong> partículas.';
+            res.classList.add('show');
+        }
+
+        function calcularMolesDesdeParticulas() {
+            const part = parseFloat(document.getElementById('part-para-mol').value);
+            const res = document.getElementById('resultado-moles-desde-part');
+            if (isNaN(part) || part <= 0) {
+                res.innerHTML = '<span style="color:#f44336;">⚠️ Ingresa un número de partículas positivo.</span>';
+                res.classList.add('show');
+                return;
+            }
+            const moles = part / N_A;
+            res.innerHTML = part + ' partículas ÷ 6,022×10²³ = <strong>' + moles.toExponential(4) + ' mol</strong>';
+            res.classList.add('show');
+        }
+
+        // ============================================================
+        //  QUIZ (15 preguntas sobre clase 3, se muestran 5 al azar)
+        // ============================================================
+        const preguntasBase = [{
+            pregunta: '¿Qué tipo de compuesto se forma entre un metal y un no metal?',
+            opciones: ['Iónico', 'Molecular', 'Covalente no polar', 'Metálico'],
+            correcta: 0,
+            explicacion: 'La unión entre metal y no metal genera compuestos iónicos por transferencia de electrones.'
+        }, {
+            pregunta: '¿Cuál es la partícula más pequeña de un compuesto iónico?',
+            opciones: ['Molécula', 'Unidad fórmula', 'Átomo', 'Ion'],
+            correcta: 1,
+            explicacion: 'En compuestos iónicos la unidad mínima es la unidad fórmula, no hay moléculas.'
+        }, {
+            pregunta: '¿Qué compuesto es un ejemplo de compuesto molecular?',
+            opciones: ['NaCl', 'CaCl₂', 'H₂O', 'KNO₃'],
+            correcta: 2,
+            explicacion: 'H₂O es molecular (no metales), los demás son iónicos (metal + no metal).'
+        }, {
+            pregunta: '¿Cuál es el número de Avogadro?',
+            opciones: ['6,022×10²²', '6,022×10²³', '6,022×10²⁴', '6,022×10²¹'],
+            correcta: 1,
+            explicacion: 'Nₐ = 6,022×10²³ partículas por mol.'
+        }, {
+            pregunta: '¿Cuántos moles hay en 58,44 g de NaCl (masa molar = 58,44 g/mol)?',
+            opciones: ['0,5 mol', '1 mol', '2 mol', '0,1 mol'],
+            correcta: 1,
+            explicacion: '1 mol de NaCl pesa 58,44 g, por lo tanto 58,44 g = 1 mol.'
+        }, {
+            pregunta: '¿Qué representa la masa molecular?',
+            opciones: ['Masa de una unidad fórmula', 'Masa de una molécula en u.m.a.', 'Masa de un átomo',
+                'Masa de un mol de moléculas'
+            ],
+            correcta: 1,
+            explicacion: 'La masa molecular es la masa de una molécula en u.m.a. (para compuestos moleculares).'
+        }, {
+            pregunta: '¿Cuál de los siguientes es un compuesto iónico utilizado como electrolito?',
+            opciones: ['Glucosa', 'Aspirina', 'NaCl', 'Oxígeno'],
+            correcta: 2,
+            explicacion: 'NaCl es un electrolito (cloruro de sodio), usado en suero fisiológico.'
+        }, {
+            pregunta: '¿Cuántas moléculas hay en 2 moles de H₂O?',
+            opciones: ['1,2044×10²⁴', '6,022×10²³', '1,2044×10²³', '3,011×10²³'],
+            correcta: 0,
+            explicacion: '2 × 6,022×10²³ = 1,2044×10²⁴ moléculas.'
+        }, {
+            pregunta: '¿Qué tipo de enlace presentan los compuestos moleculares?',
+            opciones: ['Iónico', 'Covalente', 'Metálico', 'Puente de hidrógeno'],
+            correcta: 1,
+            explicacion: 'Los compuestos moleculares tienen enlaces covalentes (compartición de electrones).'
+        }, {
+            pregunta: '¿Cuál es la masa molar del CaCO₃? (Ca=40, C=12, O=16)',
+            opciones: ['100 g/mol', '68 g/mol', '84 g/mol', '120 g/mol'],
+            correcta: 0,
+            explicacion: '40 + 12 + 3×16 = 100 g/mol.'
+        }, {
+            pregunta: '¿Cuál de estos compuestos es molecular?',
+            opciones: ['KCl', 'MgO', 'CO₂', 'CaCO₃'],
+            correcta: 2,
+            explicacion: 'CO₂ (dióxido de carbono) está formado por no metales (C y O), es molecular.'
+        }, {
+            pregunta: '¿Qué es un catión?',
+            opciones: ['Ión con carga positiva', 'Ión con carga negativa', 'Átomo neutro', 'Molécula'],
+            correcta: 0,
+            explicacion: 'Catión es un ion con carga positiva, formado al perder electrones.'
+        }, {
+            pregunta: '¿Cuál es la masa fórmula del NaCl? (Na=23, Cl=35,5)',
+            opciones: ['58,5 u.m.a.', '35,5 u.m.a.', '23 u.m.a.', '78,5 u.m.a.'],
+            correcta: 0,
+            explicacion: '23 + 35,5 = 58,5 u.m.a. (masa fórmula).'
+        }, {
+            pregunta: '¿Qué compuesto se usa como antiácido y es iónico?',
+            opciones: ['CaCO₃', 'C₆H₁₂O₆', 'C₉H₈O₄', 'NaCl'],
+            correcta: 0,
+            explicacion: 'El carbonato de calcio (CaCO₃) es un compuesto iónico usado como antiácido.'
+        }, {
+            pregunta: '¿Cuál es la masa molar de la aspirina (C₉H₈O₄)? (C=12, H=1, O=16)',
+            opciones: ['180 g/mol', '160 g/mol', '200 g/mol', '150 g/mol'],
+            correcta: 0,
+            explicacion: '9×12 + 8×1 + 4×16 = 108 + 8 + 64 = 180 g/mol.'
+        }];
+
+        let preguntasActuales = [];
+        let quizIndex = 0;
+        let quizAciertos = 0;
+        let quizRespondidas = 0;
+
+        function cargarQuiz() {
+            const shuffled = [...preguntasBase];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            preguntasActuales = shuffled.slice(0, 5);
+            quizIndex = 0;
+            quizAciertos = 0;
+            quizRespondidas = 0;
+            mostrarPregunta();
+        }
+
+        function mostrarPregunta() {
+            const container = document.getElementById('quiz-container');
+            if (quizIndex >= preguntasActuales.length) {
+                const total = preguntasActuales.length;
+                const pct = Math.round(quizAciertos / total * 100);
+                let msg = pct >= 80 ? '🎉 ¡Excelente!' : (pct >= 60 ? '💪 ¡Bien, sigue practicando!' :
+                    '📚 Revisa los conceptos y vuelve a intentarlo.');
+                container.innerHTML = `
+                    <div class="quiz-container" style="text-align:center;">
+                        <h3 style="color:var(--upch-gold);">¡Ronda completada!</h3>
+                        <p style="font-size:1.5rem;">✅ ${quizAciertos} de ${total} correctas</p>
+                        <p>Precisión: ${pct}%</p>
+                        <p>${msg}</p>
+                        <button class="calc-button" onclick="cargarQuiz()" style="margin-top:1.5rem;">🔄 Nueva ronda</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = preguntasActuales[quizIndex];
+            const opcionesHtml = q.opciones.map((opt, idx) =>
+                `<button class="quiz-option" onclick="responderPregunta(${quizIndex}, ${idx}, this)">${opt}</button>`
+            ).join('');
+
+            container.innerHTML = `
+                <div class="quiz-container">
+                    <div class="quiz-progress">
+                        <span>Pregunta ${quizIndex+1} de ${preguntasActuales.length}</span>
+                        <span>✅ ${quizAciertos} correctas</span>
+                    </div>
+                    <div class="quiz-question">${q.pregunta}</div>
+                    <div class="quiz-options">${opcionesHtml}</div>
+                    <div class="quiz-feedback" id="feedback-actual"></div>
+                </div>
+            `;
+        }
+
+        function responderPregunta(idx, opcionSeleccionada, btn) {
+            const q = preguntasActuales[idx];
+            const fb = document.getElementById('feedback-actual');
+            const opts = btn.parentElement.querySelectorAll('.quiz-option');
+            opts.forEach(o => o.disabled = true);
+
+            const correcta = q.correcta;
+            if (opcionSeleccionada === correcta) {
+                btn.classList.add('correct');
+                quizAciertos++;
+                fb.innerHTML = '<span style="color:#4caf50;font-weight:bold;">✅ ¡Correcto!</span> ' + q.explicacion;
+                fb.style.background = '#e8f5e9';
+            } else {
+                btn.classList.add('incorrect');
+                opts[correcta].classList.add('correct');
+                fb.innerHTML = '<span style="color:#f44336;font-weight:bold;">❌ Incorrecto</span> ' + q.explicacion;
+                fb.style.background = '#ffebee';
+            }
+            fb.style.display = 'block';
+            quizRespondidas++;
+
+            setTimeout(() => {
+                quizIndex++;
+                mostrarPregunta();
+            }, 2000);
+        }
+
+        // ============================================================
+        //  INICIALIZACIÓN
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            fcRenderCard();
+            cargarQuiz();
+            // Mostrar primera subpestaña de herramientas
+            document.querySelector('#herramientas-tabs .tab.active')?.click();
+        });
+
+        console.log('=== IMÁGENES PNG REQUERIDAS ===');
+        console.log('1. logo-upch.png          → Logo de la universidad (cabecera)');
+        console.log('2. red-ionica.png         → Red cristalina iónica (ej. NaCl)');
+        console.log('3. moleculas.png          → Moléculas comunes (agua, CO₂, glucosa, aspirina)');
+        console.log('4. aplicaciones-salud-clase3.png → Aplicaciones en salud (electrolitos, fármacos, dosificación)');
+        console.log('Coloca estos archivos en la misma carpeta que este HTML.');
+    </script>
+</body>
+</html>
